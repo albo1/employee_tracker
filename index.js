@@ -16,7 +16,7 @@ const db = mysql.createConnection(
 const promptMessages = {
   viewDepartments: 'View all Departments',
   viewRoles: 'View all Roles',
-  viewEmployees: 'View All employees',
+  viewEmployees: 'View All Employees',
   addDepartment: 'Add a Department',
   addRole: 'Add a Role',
   addEmployee: 'Add a new Employee',
@@ -68,12 +68,14 @@ function initQuest() {
           break;
         case promptMessages.quit:
           db.end();
-          initQuest();
+          // initQuest();
           break;
       }
 
     });
 }
+initQuest();
+
 
 function viewDepartments() {
   const query = 'SELECT name AS Department, id AS "Department ID" FROM department';
@@ -106,4 +108,40 @@ function viewEmployees() {
     console.table(result);
     initQuest();
   });
+}
+
+function addDepartment() {
+  inquirer
+    .prompt({
+      name: 'newdept',
+      type: 'input',
+      message: 'What Department would you like to add?'
+    })
+    .then(answer => {
+      const query = `INSERT INTO department(name) VALUES ("${answer.newdept}")`;
+      db.query(query, (err) => {
+        if (err) {
+          console.log(err);
+        } console.log("Successfully added new Department to database!");
+      });
+      initQuest();
+    });
+}
+
+function addRole() {
+  inquirer
+    .prompt({
+      name: 'newdept',
+      type: 'input',
+      message: 'What Department would you like to add?'
+    })
+    .then(answer => {
+      const query = `INSERT INTO department(name) VALUES ("${answer.newdept}")`;
+      db.query(query, (err) => {
+        if (err) {
+          console.log(err);
+        } console.log("Successfully added new Department to database!");
+      });
+      initQuest();
+    });
 }
