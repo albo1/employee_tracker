@@ -140,8 +140,15 @@ function addRole() {
     },
     {
       name: 'department',
-      type: 'input',
-      message: 'What department does the role belong to?'
+      type: 'list',
+      message: 'What department does the role belong to?',
+      choices: [
+        'Sales',
+        'Marketing',
+        'Executive',
+        'IT',
+        'HR'
+      ],
     }
     ])
     .then(answer => {
