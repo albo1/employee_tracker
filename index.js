@@ -74,8 +74,6 @@ function initQuest() {
 
     });
 }
-initQuest();
-
 
 function viewDepartments() {
   const query = 'SELECT name AS Department, id AS "Department ID" FROM department';
@@ -181,14 +179,71 @@ function addEmployee() {
     }
     ])
     .then(answer => {
-      const rolequery = `INSERT INTO role(title, salary, department_id) VALUES ("${answer.newrole}", ${answer.salary}, (SELECT id FROM department WHERE name = "${answer.department}"))`;
-      const managerquery = 
+      const rolequery = `SELECT id FROM role WHERE title = ("${answer.newjob}")`
+      const managerquery = `(SELECT id FROM employee WHERE last_name = "${answer.newmanager}")`
+      const query = `INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("${answer.newemployeefirstname}", "${answer.newemployeelastname}",(SELECT id FROM role WHERE title = "${answer.newjob}") , (SELECT id FROM employee WHERE last_name = "${answer.newmanager}"))`;
       
+      db.query(rolequery, (err, roledata) => {
+        if (err) {
+          console.log(err);
+        } 
+        db.query(manageryquery, (err, managerdata) => {
+          if (err) {
+            console.log(err);
+          }
+          db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("${answer.newemployeefirstname}", "${answer.newemployeelastname}", "${roledata[0].id}", "${managerdata[0].id}")`, (err) => {
+            if (err) {
+              console.log(err);
+            } console.log("Successfully added new employee to database!");
+          });
+          initQuest();
+        }); 
+      });
+    });
+}
+
+function updateEmployeeRole() {
+  inquirer
+    .priompt([{
+      name: 'pickemployee',
+      type: 'list',
+      message: 'Which employee would you like to update?',
+      choices: [
+        'Jean Grey',
+        'Barry Allen',
+        'Spike Spiegel',
+        'Izuku Midoriya',
+        'Toshinori Yagi',
+        'Itachi Uchiha',
+        'Saitama Capedbaldy',
+        'Mikasa Ackerman',
+        'Revy Lee',
+      ],
+    },
+    {
+      name: 'picknewrole',
+      type: 'list',
+      message: 'What is the employees new role?',
+      choices: [
+        'Sales Rep',
+        'Marketing Rep',
+        'CFO',
+        'Junior Software Engineer',
+        'Human Resource Assistant'
+      ],
+    }])
+    .then (answer => {
+      const query = `UPDATE employee SET role_id = (SELECT id FROM role WHERE title = "${answer.picknewrole}") WHERE CONCAT(first_name, " ", last_name) = "${answer.pickemployee}"`;
       db.query(query, (err) => {
         if (err) {
           console.log(err);
-        } console.log("Successfully added new role to database!");
+        } console.log("Succesfully Updated Employee!");
       });
       initQuest();
     });
 }
+
+db.connect(err => {
+  if (err) throw err;
+  initQuest();
+});
