@@ -73,3 +73,7 @@ function initQuest() {
 
     });
 }
+
+function viewDepartments() {
+  
+}
