@@ -1,7 +1,7 @@
 INSERT INTO department (name)
 VALUES
  ('Sales'),
- ('Marketing')
+ ('Marketing'),
  ('Executive'),
  ('IT'),
  ('HR');
@@ -16,17 +16,17 @@ VALUES
  ('CFO', 235000, 3),
  ('Senior Software Engineer', 120000, 4),
  ('Junior Software Engineer', 90000, 4),
- ('Human Resource Assistant' 55000, 5),
+ ('Human Resource Assistant', 55000, 5),
  ('Human Resource Manager', 150000, 5);
 
-INSERT INTO employees (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
  ('Peter', 'Parker', 1, NULL),
  ('Jean', 'Grey', 1, 1),
  ('Barry', 'Allen', 1, 1),
  ('Kara', 'Zor-El', 2, NULL),
- ('Spike', 'Spiegel', 2, 3),
- ('Izuku', 'Midoriya', 2, 3),
+ ('Spike', 'Spiegel', 2, 4),
+ ('Izuku', 'Midoriya', 2, 4),
  ('Mark', 'Grayson', 3, NULL),
  ('Toshinori', 'Yagi', 3, 7),
  ('Barbara', 'Gordon', 4, NULL),
