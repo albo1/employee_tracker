@@ -130,17 +130,64 @@ function addDepartment() {
 
 function addRole() {
   inquirer
-    .prompt({
-      name: 'newdept',
+    .prompt([{
+      name: 'newrole',
       type: 'input',
-      message: 'What Department would you like to add?'
-    })
+      message: 'What role would you like to add?'
+    },
+    {
+      name: 'salary',
+      type: 'input',
+      message: 'What would you like the salary to be?'
+    },
+    {
+      name: 'department',
+      type: 'input',
+      message: 'What department does the role belong to?'
+    }
+    ])
     .then(answer => {
-      const query = `INSERT INTO department(name) VALUES ("${answer.newdept}")`;
+      const query = `INSERT INTO role(title, salary, department_id) VALUES ("${answer.newrole}", ${answer.salary}, (SELECT id FROM department WHERE name = "${answer.department}"))`;
       db.query(query, (err) => {
         if (err) {
           console.log(err);
-        } console.log("Successfully added new Department to database!");
+        } console.log("Successfully added new role to database!");
+      });
+      initQuest();
+    });
+}
+
+function addEmployee() {
+  inquirer
+    .prompt([{
+      name: 'newemployeefirstname',
+      type: 'input',
+      message: 'What is the new employees First name?'
+    },
+    {
+      name: 'newemployeelastname',
+      type: 'input',
+      message: 'What is the new employees Last name?'
+    },
+    {
+      name: 'newjob',
+      type: 'input',
+      message: 'What is the new employess role?'
+    },
+    {
+      name: 'newmanager',
+      type: 'input',
+      message: 'What is the managers name?'
+    }
+    ])
+    .then(answer => {
+      const rolequery = `INSERT INTO role(title, salary, department_id) VALUES ("${answer.newrole}", ${answer.salary}, (SELECT id FROM department WHERE name = "${answer.department}"))`;
+      const managerquery = 
+      
+      db.query(query, (err) => {
+        if (err) {
+          console.log(err);
+        } console.log("Successfully added new role to database!");
       });
       initQuest();
     });
