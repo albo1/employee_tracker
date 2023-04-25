@@ -30,7 +30,7 @@ VALUES
  ('Mark', 'Grayson', 3, NULL),
  ('Toshinori', 'Yagi', 3, 3),
  ('Barbara', 'Gordon', 4, NULL),
- ('Rock', 'Lee', 4, 4),
+ ('Itachi', 'Uchiha', 4, 4),
  ('Saitama', 'Capedbaldy', 4, 4),
  ('Mikasa', 'Ackerman', 5, 5),
  ('Revy', 'Lee', 5, 5),
