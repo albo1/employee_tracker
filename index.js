@@ -9,9 +9,13 @@ const db = mysql.createConnection(
     user: 'root',
     password: 'ALLmight',
     database: 'employees_db'
-  },
-  console.log(`Connected to Employee Database!`)
-);
+  });
+db.connect((err) => {
+  if (err) {
+    console.log(err);
+    return;
+  } console.log(`Connected to Employee Database!`)
+});
 
 const promptMessages = {
   viewDepartments: 'View all Departments',
@@ -176,13 +180,17 @@ function addEmployee() {
     },
     {
       name: 'newjob',
-      type: 'input',
-      message: 'What is the new employess role?'
+      type: 'list',
+      message: 'What is the managers name?',
+      choices: ['Sales Rep', 'Marketing Rep', 'CFO', 'Junior Software Engineer', 'Human Resouce Assistant'
+    ],
     },
     {
       name: 'newmanager',
-      type: 'input',
-      message: 'What is the managers name?'
+      type: 'list',
+      message: 'What is the managers name?',
+      choices: ['Peter Parker', 'Kara Zor-El', 'Mark Grayson', 'Barbara Gordon', 'Diana Price'
+    ],
     }
     ])
     .then(answer => {
@@ -194,7 +202,7 @@ function addEmployee() {
         if (err) {
           console.log(err);
         } 
-        db.query(manageryquery, (err, managerdata) => {
+        db.query(managerquery, (err, managerdata) => {
           if (err) {
             console.log(err);
           }
