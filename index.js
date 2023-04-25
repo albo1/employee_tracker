@@ -30,6 +30,25 @@ function initQuest() {
       name: 'options',
       type: 'list',
       message: 'What would you like to do?',
-      choices: 
+      choices: [
+        promptMessages.viewDepartments,
+        promptMessages.viewRoles,
+        promptMessages.viewEmployees,
+        promptMessages.addDepartment,
+        promptMessages.addRole,
+        promptMessages.addEmployee,
+        promptMessages.updateEmployeeRole,
+        promptMessages.quit
+      ]
+    })
+    .then(answer => {
+      console.log('answer', answer);
+      switch (answer.option) {
+        case promptMessages.viewDepartments:
+          viewDepartments();
+          break;
+
+        case 
+      }
     })
 }
