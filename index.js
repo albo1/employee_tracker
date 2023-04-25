@@ -24,3 +24,11 @@ const promptMessages = {
     quit: 'Quit'
 };
 
+function initQuest() {
+  inquirer
+    .prompt({
+      name: 'options',
+      type: 'list',
+      
+    })
+}

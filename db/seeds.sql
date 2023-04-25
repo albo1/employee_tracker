@@ -25,15 +25,15 @@ VALUES
  ('Jean', 'Grey', 1, 1),
  ('Barry', 'Allen', 1, 1),
  ('Kara', 'Zor-El', 2, NULL),
- ('Spike', 'Spiegel', 2, 2),
- ('Izuku', 'Midoriya', 2, 2),
+ ('Spike', 'Spiegel', 2, 3),
+ ('Izuku', 'Midoriya', 2, 3),
  ('Mark', 'Grayson', 3, NULL),
- ('Toshinori', 'Yagi', 3, 3),
+ ('Toshinori', 'Yagi', 3, 7),
  ('Barbara', 'Gordon', 4, NULL),
- ('Itachi', 'Uchiha', 4, 4),
- ('Saitama', 'Capedbaldy', 4, 4),
- ('Mikasa', 'Ackerman', 5, 5),
- ('Revy', 'Lee', 5, 5),
+ ('Itachi', 'Uchiha', 4, 9),
+ ('Saitama', 'Capedbaldy', 4, 9),
+ ('Mikasa', 'Ackerman', 5, 14),
+ ('Revy', 'Lee', 5, 14),
  ('Diana', 'Prince', 5, NULL);
  
  
