@@ -75,5 +75,12 @@ function initQuest() {
 }
 
 function viewDepartments() {
-  
+  const query = 'SELECT name AS Department, id AS "Department ID" FROM department';
+  db.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    console.table(result);
+    initQuest();
+  });
 }
