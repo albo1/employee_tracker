@@ -29,6 +29,7 @@ function initQuest() {
     .prompt({
       name: 'options',
       type: 'list',
-      
+      message: 'What would you like to do?',
+      choices: 
     })
 }
