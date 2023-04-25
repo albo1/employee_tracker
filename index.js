@@ -12,3 +12,15 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to Employee Database!`)
   );
+
+const promptMessages = {
+    viewDepartments: 'View all Departments',
+    viewRoles: 'View all Roles',
+    viewEmployees: 'View All employees',
+    addDepartment: 'Add a Department',
+    addRole: 'Add a Role',
+    addEmployee: 'Add a new Employee',
+    updateEmployeeRole: 'Update an Employee Role',
+    quit: 'Quit'
+};
+
