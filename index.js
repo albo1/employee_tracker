@@ -4,24 +4,24 @@ const cTable = require('console.table');
 cTable;
 
 const db = mysql.createConnection(
-    {
-      host: '127.0.0.1',
-      user: 'root',
-      password: 'ALLmight',
-      database: 'employees_db'
-    },
-    console.log(`Connected to Employee Database!`)
-  );
+  {
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'ALLmight',
+    database: 'employees_db'
+  },
+  console.log(`Connected to Employee Database!`)
+);
 
 const promptMessages = {
-    viewDepartments: 'View all Departments',
-    viewRoles: 'View all Roles',
-    viewEmployees: 'View All employees',
-    addDepartment: 'Add a Department',
-    addRole: 'Add a Role',
-    addEmployee: 'Add a new Employee',
-    updateEmployeeRole: 'Update an Employee Role',
-    quit: 'Quit'
+  viewDepartments: 'View all Departments',
+  viewRoles: 'View all Roles',
+  viewEmployees: 'View All employees',
+  addDepartment: 'Add a Department',
+  addRole: 'Add a Role',
+  addEmployee: 'Add a new Employee',
+  updateEmployeeRole: 'Update an Employee Role',
+  quit: 'Quit'
 };
 
 function initQuest() {
@@ -48,7 +48,28 @@ function initQuest() {
           viewDepartments();
           break;
 
-        case 
+        case promptMessages.viewRoles:
+          viewRoles();
+          break;
+        case promptMessages.viewEmployees:
+          viewEmployees();
+          break;
+        case promptMessages.addDepartment:
+          addDepartment();
+          break;
+        case promptMessages.addRole:
+          addRole();
+          break;
+        case promptMessages.addEmployee:
+          addEmployee();
+          break;
+        case promptMessages.updateEmployeeRole:
+          updateEmployeeRole();
+          break;
+        case promptMessages.quit:
+          db.end();
+          break;
       }
-    })
+
+    });
 }
