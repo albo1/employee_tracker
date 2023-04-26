@@ -32,9 +32,9 @@ VALUES
  ('Barbara', 'Gordon', 4, NULL),
  ('Itachi', 'Uchiha', 4, 9),
  ('Saitama', 'Capedbaldy', 4, 9),
- ('Mikasa', 'Ackerman', 5, 14),
- ('Revy', 'Lee', 5, 14),
- ('Diana', 'Prince', 5, NULL);
+ ('Mikasa', 'Ackerman', 5, NULL),
+ ('Revy', 'Lee', 5, 12),
+ ('Diana', 'Prince', 5, 12);
  
  
 

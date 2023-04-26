@@ -168,58 +168,62 @@ function addRole() {
 
 function addEmployee() {
   inquirer
-    .prompt([{
-      name: 'newemployeefirstname',
-      type: 'input',
-      message: 'What is the new employees First name?'
-    },
-    {
-      name: 'newemployeelastname',
-      type: 'input',
-      message: 'What is the new employees Last name?'
-    },
-    {
-      name: 'newjob',
-      type: 'list',
-      message: 'What is the managers name?',
-      choices: ['Sales Rep', 'Marketing Rep', 'CFO', 'Junior Software Engineer', 'Human Resouce Assistant'
-    ],
-    },
-    {
-      name: 'newmanager',
-      type: 'list',
-      message: 'What is the managers name?',
-      choices: ['Peter Parker', 'Kara Zor-El', 'Mark Grayson', 'Barbara Gordon', 'Diana Price'
-    ],
-    }
+    .prompt([
+      {
+        name: 'newemployeefirstname',
+        type: 'input',
+        message: 'What is the new employees First name?'
+      },
+      {
+        name: 'newemployeelastname',
+        type: 'input',
+        message: 'What is the new employees Last name?'
+      },
+      {
+        name: 'newjob',
+        type: 'list',
+        message: 'What is the employees job title?',
+        choices: ['Sales Rep', 'Marketing Rep', 'CFO', 'Junior Software Engineer', 'Human Resouce Assistant'
+        ],
+      },
+      {
+        name: 'newmanager',
+        type: 'list',
+        message: 'What is the managers name?',
+        choices: ['Peter Parker', 'Kara Zor-El', 'Mark Grayson', 'Barbara Gordon', 'Mikasa Ackerman'
+        ],
+      }
     ])
     .then(answer => {
       const rolequery = `SELECT id FROM role WHERE title = ("${answer.newjob}")`
-      const managerquery = `(SELECT id FROM employee WHERE last_name = "${answer.newmanager}")`
+      const managerquery = `(SELECT id FROM employee WHERE last_name = "${answer.newmanager.split(" ")[1]}")`
       const query = `INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("${answer.newemployeefirstname}", "${answer.newemployeelastname}",(SELECT id FROM role WHERE title = "${answer.newjob}") , (SELECT id FROM employee WHERE last_name = "${answer.newmanager}"))`;
-      
-      db.query(rolequery, (err, roledata) => {
+
+      db.query(rolequery, (err, rdata) => {
         if (err) {
           console.log(err);
-        } 
-        db.query(managerquery, (err, managerdata) => {
+        }
+        const roleId = rdata[0].id;
+        db.query(managerquery, (err, mdata) => {
           if (err) {
             console.log(err);
           }
-          db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("${answer.newemployeefirstname}", "${answer.newemployeelastname}", "${roledata[0].id}", "${managerdata[0].id}")`, (err) => {
+          console.log('mdata', mdata);
+          const managerId = mdata[0].id;
+          db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("${answer.newemployeefirstname}", "${answer.newemployeelastname}", "${roleId}", "${managerId}")`, (err) => {
             if (err) {
               console.log(err);
             } console.log("Successfully added new employee to database!");
           });
           initQuest();
-        }); 
+        });
       });
     });
 }
 
 function updateEmployeeRole() {
   inquirer
-    .priompt([{
+    .prompt([{
       name: 'pickemployee',
       type: 'list',
       message: 'Which employee would you like to update?',
@@ -247,7 +251,7 @@ function updateEmployeeRole() {
         'Human Resource Assistant'
       ],
     }])
-    .then (answer => {
+    .then(answer => {
       const query = `UPDATE employee SET role_id = (SELECT id FROM role WHERE title = "${answer.picknewrole}") WHERE CONCAT(first_name, " ", last_name) = "${answer.pickemployee}"`;
       db.query(query, (err) => {
         if (err) {
