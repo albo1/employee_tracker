@@ -9,7 +9,7 @@ Once you open the application begin by typing in node index.js and uyou will be 
 ## USAGE
 You will be able to utilize this application to keep your small company organized!
 
-LINK to VIDEO WALKTHROUGH: 
+LINK to VIDEO WALKTHROUGH: https://drive.google.com/file/d/1LnKRUar8D_A7Cdspei_vNBAAZ53yPwTT/view
 
 ## CREDITS
 
